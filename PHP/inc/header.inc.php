@@ -12,26 +12,28 @@
    <link rel='stylesheet' href='css/style.css'>
 </head>
 <body>
+    <!--debut de header-->
     <header>
         <!--nav-->
         <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Active</a>
+              <a class="nav-link active" aria-current="page" href="index.php">Mon site</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="page1.php">page 1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="insciption.php">inscrypsion</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+                <a class="nav-link" href="entrainement.php">cours entrainement</a>
             </li>
         </ul>
+        <!-- fin de nav-->
+        <div class='row'><img src="img/banner.png" alt="Guren_spade"></div>
     </header>
-    <!-- cdn bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-    <script src='js.script.js'></script>
-</body>
-</html>
+    <!--fin de header-->
+
+    <!--debut main-->
+    <main class ="container">
+    

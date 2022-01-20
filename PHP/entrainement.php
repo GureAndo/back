@@ -1,4 +1,5 @@
-<?php
+<?php require_once('inc/header.inc.php');
+
 //chapitre 1 affichage 
 print "bjr <br>";
 // ces deux instruction servent a afficher du contenu. mais on va utiliser tout le temps echo plus rapide a l'execution.
@@ -581,3 +582,76 @@ echo"<table border = '1' style = 'border-collapse:collapse'>";
 echo"</table>";
 
 // chapitre 10 les inclusion de fichiers
+
+echo "--------------je suis dans le fichier entrainement.php-----------";
+//la function include() permet d'importer du contenu
+include('inc/fichier.inc.php');
+//require() permet d'impoter de la meme maniere que include(). la differance entre mes deux c'est que si il ya une erreur dans le code, include() va notifier l'erreur/warning mais permettre au reste du code de s'executrer alors que require() va bloquer le de code dans sont intergraliter (en notifiant l'erreur)
+require('inc/fichier.inc.php');
+
+// il existe d'autre fonction predefinie qui vont me permmetre de n'imprter le fichier qu'une seul fois dans la page.
+//elle vont m'assurer cette securite car il serais illogique,inepte d'impoter ce meme contenu ou code 2 fois je pourais l'impoter dans d'autre page mais une seul fois
+// il s'agit de include_once() et require_once().
+echo "--------------je suis revenu dans le fichier entrainement.php-----------";
+echo "<br>";
+
+//chapitre 11 les tableau / arrays
+
+// un tableau est un type de var https://www.php.net/manual/fr/language.types.php. Elle a la particularite de pouvoir stocker plusieurs valeurs et les restituer telles que si on en a besoin.
+
+
+//cette var ci dessous, ne sera pas capable de séparer les valeur lors de l'affichage.  elle va afficher la totaliter , comme une chaine de chara
+$listePrenom ="Inès, Yann, Aziz, Julien, Mathilde";
+echo $listePrenom . "<br>";
+
+
+// voici une syntaxe classique pour declarer un tableau 
+//je le nomme (ici camelCase) et je lui affecte sa liste de valeurs en l'entroduisant avec le mot clef array
+//je donne les valleurs entre parenthaise ,chaune séparée de l'autre avec une virgule
+$tableauPrenoms = array ('Inès', 'Yann', 'Aziz','Julien','Mathilde');
+// la syntaxe ci-dessou se rencontre parfois ,mais moins souvent le dev aura voulu aérer son code car la liste des valeures etais longue
+// $tableauPrenoms = array(
+//     'inès',
+//     'Yann',
+//     'Aziz',
+//     'Julien',
+//     'Mathilde',
+// )
+// l'instruction print_r() premet un affichage non-conventionelle (affichage pour un devlopper mais pas pour un utilisateur). il va me permettre de voir tout ce que contient ma var
+echo print_r($tableauPrenoms). "<br>";
+
+// la balise <pre> permet une meilleur lisibiliter de ce resulat
+echo "<pre>";print_r($tableauPrenoms);echo "</pre>";
+echo'----------------------------------------------------<br>';
+//var_dump() est une instruction qui permet d'afficher les information contenues dans une var comme print_r() mais de maniere encore plus precise
+//j'aurais des le debut le nombre qu'elle contient. le type de chaque valeur,la longeur de a chaine de chara si c'est un string
+//noter que pour Inès , la longeure de la chaine de chara est de 5 et non de 4, a cause de l'accent sur le 2
+echo "<pre>";
+var_dump($tableauPrenoms);
+echo"</pre>";
+$listePays= array("japon");
+//syntaxe pour récupere une valeur en particullier
+//je vais crocheter ( car c'est une valeur donnée entre crochets, d'ou le nom) à l'indice du tableau. je donne donc le nom du tableau , puis entre crochet l'indice
+echo $tableauPrenoms[0] . "<br>";
+
+// autre syntaxe pour un tableau, qui a pouravantage de pouvoir ajouter des valeurs qui ne sont pas connues des le debut.
+// rien ne m'empechera de declarer deux valeurs , continuer mon code et sur vingt ligne , puis ajouter une nouvelel valeur ect.....
+$listePays[]= "France";
+$listePays[]= "Espagne";
+$listePays[]= "Algérie";
+$listePays[]= "Italy";
+$listePays[]= "Russie";
+
+// print_r pour avoir les informations sur ce array
+echo "<pre>";print_r($listePays);echo "</pre>";
+
+// la boucle foreach adapter au tableaux
+// essayer dans ce genre de situation  d'utiliser '$key' et 'value'.car ils sont tres utiliser pour l'alias et la valeur(meme si ce n'est pas une obligation comme on a dit) ce n'est que pour vous habituer a cette syntaxe qui revient tres frequamment 
+// la boucle foreach necessite en premier lieux le nom de la veriable / tableau /array sur laquelle elle doit travailler. Ensuite le mot clef as pour donner un alias a la var/tableau (ici cet alias sera $key). enfin elle fera creespondre à =>(fleche) 
+// dans cette syntaxe, les element les plus imprtants sont le as et le =>
+//le nom de l'alias ainsi que de la valeur n'au aucune forme d'importance (tant qu'on leur en donne un) 
+foreach($listePays as $key => $value){
+    echo "<p>l'indice " . $key ." apour valeur le pays " . $value. "</p>";
+}
+
+require_once('inc/footer.inc.php');
