@@ -1,5 +1,5 @@
 <?php
-// PDO est une surcouche de PKP, surcouche d'abstraction, qui permet d'interagir avec la base de donnees.
+// PDO est une surcouche de PHP, surcouche d'abstraction, qui permet d'interagir avec la base de donnees.
 //Nous disposerons ainsi de plusieurs function predefinipropres a la class PDO
 //pour pouvoir les exploiter, je doit cree un objet $pdo de ma classe PDO
 // je ne suis pas oubliger de l'appeler ainsi. vous trouverais parfois le nom $bdd. le plus importatn est quelle ai un nom cohérantt
