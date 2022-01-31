@@ -137,7 +137,7 @@ if($_POST){
             <input id="email" name="email" type="text" placeholder="Mail" value="" required>
         </div>
 
-        <div class="form-group my-2">
+        <div>
             <label for="type_contact">Type contact</label>
             <select name="type_contact" id="type_contact" class="form-control" required>
                 <option value="ami" >ami</option>
