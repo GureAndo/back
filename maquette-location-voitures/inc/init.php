@@ -9,7 +9,7 @@
 //les quotes vide '' son pour le mot de dbpassword(mot de passe pour la base de donnees) en local il doit rester vide pas de ndp
 $pdo = new PDO('mysql:host=localhost;dbname=voiture','root', '',array(
     //dans ce tableau(array) ,je vais definir deux parametre 
-    //le premier concerne le mode d'erreur que je je recevoir en affichage lorsqu'il y en a . je choisi le mode warning
+    //le premier concerne le mode d'erreur que je veut recevoir en affichage lorsqu'il y en a . je choisi le mode warning
     PDO::ATTR_ERRMODE=> PDO::ERRMODE_WARNING, 
     // ci dessou je decide du type d'encodage que je veut vert la base de donnees (utf8, comme dans le doctype)
     PDO:: MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',

@@ -8,21 +8,20 @@ if(!isset($_GET['id'])|| !ctype_digit($_GET['id'])|| $_GET['id'] < 1){
 }
 
 if($_POST){
-    //je verifie le contenu du champs reseration_message
-    //qu'il existe q'uil na pas recu moin de 3 chara et plus de 200 chara sinon je geneere un msg d'erreur
+    //je verifie le contenu du champs reservation_message
+    //qu'il existe qu'il n'a pas reçu moins de 3 chara et plus de 200 chara sinon je genere un msg d'erreur
     if(!isset($_POST['reservation_message']) || iconv_strlen($_POST['reservation_message']) <= 3  || iconv_strlen($_POST['reservation_message']) >200){
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur reservation message !</div>';
     }
-    // si aucun msg d'erreur na ete generer,c'est que $erreur n'a pas recu de valeur donc je peut enclencher la precedure
-    //d'envoie des donner en BDD
+    // si aucun msg d'erreur n'a ete generer,c'est que $erreur n'a pas recu de valeur donc je peut enclencher la precedure d'envoie des donner en BDD
     if(empty($erreur)){
         //j'utilise mon objet $pdo pour interagir avec la BDD
         //je fait un requete preparer pour securiser l'envoie des donnees
-        //je vais faire un modif en BDD d'iu l'usage de la requete UPDATE
+        //je vais faire une modif en BDD d'iu l'usage de la requete UPDATE
         //je fait correspondre les indice conserner en BDD avec son equivalent avec un marquer nomée(:)
         //le WHERE sert a  faire correspondre le vehicule qui a cette id (dans cette pages) avec le vehicule qui a le meme id en BDD
         $ajoutMessage = $pdo->prepare("UPDATE vehicule SET id = :id, reservation_message = :reservation_message WHERE id = :id");
-        //je code les blindValue pour faire correspondrel'indice le pointeur nommeé(:) avec la valeur recu du formulaire + j'indiquele type de cette valeur(PARAM_INT pour le type interger  )
+        //je code les bindValue pour faire correspondre l'indice avec le pointeur nommeé(:) avec la valeur recu du formulaire + j'indique le type de cette valeur(PARAM_INT pour le type interger  )
         $ajoutMessage->bindValue(':id', $_POST['id'],PDO::PARAM_INT);
         $ajoutMessage->bindValue(':reservation_message', $_POST['reservation_message'],PDO::PARAM_STR);
         //une fois les blindValue scriptés, j'execute ma requete préparée (obligatoire)
