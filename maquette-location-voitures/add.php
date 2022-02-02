@@ -1,7 +1,7 @@
 <?php require_once('inc/header.php');
 
 //if(POST) permet de dire à PHP de ne s'occuper du traitement qui va suivre seulement dans le cas ou des info auron ete envoyer dans le fromulaire.Sinon il ne fait rien 
-// et c'est plutot bien, car au premiere chargement de catte page, au moment ou je l'affiche, je n'ai encore justement pas remplis le formulaire . sans cela , j'aurais eu le droit a un warning, unidentified $varect.... 
+// et c'est plutot bien, car au premiere chargement de catte page, au moment ou je l'affiche, je n'ai encore justement pas remplis le formulaire . sans cela , j'aurais eu le droit a un warning, unidentified $var ect.... 
 if($_POST){
     //je verifie deux chose ici. la 1ere c'est que le champs est bien renseigne (avec isset, s'il ne l'est pas alors cela engendra une erreur) le second parametre conserne la longeur de chaine de chara (avec icon_strlen) il elle est inferieure a 3 ou supperieur a 20, cela engendra aussi un erreur
     //j'utilise iconv_strlen mais vous rencontrerez souvent la syntaxe avec strlen .c'est un choix de ma part  je le trouve plus judicieux mais l'autre et tres utilse aussi
@@ -27,7 +27,7 @@ if($_POST){
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur Ville !</div>';
     }
 
-    //a nouveau verification si l'envoi de donnees aete effectuer ou non.
+    //a nouveau verification si l'envoi de donnees a ete effectuer ou non.
     //j'utiliser cette fois un preg_match pour controler la valeur envoyee.
     //avec cette syntaxd j'autorise tous les chifre de 0 a 9 [0-9] et j'autorise aussi 1 seul chiffre (je loue a caisse 5€/j jusqua 7, je vend ma caisse 1 000 000 , de 1 jusqu'a 7){1,7}
     if(!isset($_POST['price']) || !preg_match("#^[0-9]{1,7}$#",$_POST['price'])){

@@ -879,16 +879,97 @@ $pdo = new PDO('mysql:host=localhost;dbname=voiture','root', '',array(
 ));
 // get_class_methods me permet de visualiser les differantes methode predefini de la classe pdo qui seront utilisable, prete a l'emploi 
 echo "<pre>";print_r(get_class_methods($pdo));echo "</pre>";
-
+echo'-----------------------------------';
+//method query (select)
 //je seclectionne dans ma base de donnees a la tablevehicule toutes les valeurs du vheicule dont le titresera egale a pagani
-$afficheVehicule = $pdo->query("SELECT * FROM vehicule WHERE id = 'pagani'");
+$afficheVehicule = $pdo->query("SELECT * FROM vehicule WHERE title = 'pagani zonda'");
 //le var_dump de afficheVehicule m'indiqueque c'est un objet de la classe PDOStatement
 //PDOStatement est directement liee a la classe PDO elle intervient des que la requete SELECT est entamé
 echo "<pre>";var_dump($afficheVehicule);echo "</pre>";
 
 //meme si c'est possible de faire INSERT INTO, UPDATE ou DELETE avecla methode queryil faut l'utiliser selment pour le SELECT
 // si je doit modifier ma base de donneee( avec une insertion ,modification ou suppretion il faudra faire une requete preparer avec prepare())
+
+echo'-----------------------------------';
+//method query fetch()
+//$afficheVehicule est la variable a laquelle on a affecter le resultat de la requete query (elle stock les information de tous les vehicule conserner par la selection)
+//la method fetch va a present rechercher en BDD tous les vehicule concerner par la selection et affecter ce resultat dns la variable $vehicule
+// PDO::FETCH_ASSOC permet de cibler la colone par son nom(FETCH_BOTH permet d'utiliser des chaine de chara et les numero des indice tandis que  FETCH_NUM permet d'utiliser uniquerment des numero d'indice)
+$vehicule = $afficheVehicule->fetch(PDO::FETCH_ASSOC);
+//print_r pour afficher les resultat (de maniere non conventionelle ) stocker dans $vehicule
+echo "<pre>"; print_r($vehicule); echo"</pre>";
+
+//le resulmtat du fetch etant stocker dans le $vehicule c'est manitent cette variable que je vais utiliser pour apller les valeur qui m'interesse 
+// je les cible en crochetant a l'indice qui m'interesse
+//dans le syntaxe ci dessou, volontairment je n'ai pas concatener $vehicule ['price'] comme pour les autre indices.
+//c'est pour rappeler que entre bdouble quotes("") un variable sera interpreter par contre je devrais suprimer les simple quotes a l'interieur des crochets.
+echo "<p>le vehicule " . $vehicule['title'] . " est disponible dans la ville de " . $vehicule['city'] . " au prix de $vehicule[price]  €</p>";
+
+
 ?>
+<!--je fait une nouvelle requete de selection , cette fois pour recuperer tout les vehicule de la bdd pas seilment ceux de la pagani 
+
+pour le thead:
+la boucle for va me permmettre de generer autant de th qu'il ya de monbre de colonne en BDD pour cela j'utilise la fonction predefini colnumCount ma boucle for() s'exectutra tant que il ya des collone a afficher
+une fois ce nombre determiner je vais recuperer touts les metas contenue dans mon tableau en BDD et je'affecte ce resultat a $colonne
+la meta qui m'interesse ici c'est 'name' c'est pour cela que c'estla que je crochete(je ^peut le voir dans le var_dump au dessu ce chaque non il ya [name]) le $colonne elle va me permetre de recuperer toutes les valeurs, les noms de mes colonnes
+
+pour le tbody:
+cette while va permetre de recupere chaque ligne qu'elle va rencontrer en BDD.
+la foreach quand a elle sert a recupere chaque valeurs de vehicule sur la quel elle boucle
+donc en soit la while cree un ligne la foreach prend le relais la remplis et ainsi de suite jusqu'a ce qu'il n'y est plus de donnees a metre dans une ligne.
+-->
+<table class="table md-12">
+
+<?php $afficheVoiture = $pdo->query("SELECT * FROM vehicule LIMIT 10 ")?> 
+
+    <thead>
+        <tr>
+            <?php for($i = 0;$i < $afficheVoiture->columnCount() ;$i++): $colonne = $afficheVoiture->getColumnMeta($i)?>
+            <!-- <?php echo "<pre>"; var_dump($colonne);echo"</pre>";?> -->
+            <th><?=$colonne['name']?></th>
+            <?php endfor;?>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php while($voiture = $afficheVoiture->fetch(PDO::FETCH_ASSOC)): ?>
+        <tr>
+            <?php foreach ($voiture as $key => $value):?>
+                <?php if ($key == 'price') :?>
+                    <td><?=$value?> €</td>
+                <?php else :?>
+                    <td><?=$value?></td>
+                <?php endif?>        
+            <?php endforeach?>
+        </tr>
+        <?php endwhile;?>
+    </tbody>
+
+</table>
+<a href="../dialogue/dialogue.php" target="_blank"><button type="submit" class="btn btn-primary">vers la page dialogue</button></a>;
+
+<!-- ces particulariter pour afficher des valeur au format differant-->
+<!-- je doit afficher une photo, ou afficher un pris, je vais devoir faire des condition pour les differant cas de figure -->
+<!-- <?php while($produit = $afficheProduit->fetch(PDO::FETCH_ASSOC)): ?>
+    <tr>
+        <?php foreach ($produit as $key => $value):?>
+            cette condition if() va donner un affichage differant pour les prix ou autre 
+            si l'indice == photo je veut afficher la photo
+            le $value et le nom de la photo stoquer en BDD
+            c'est pour cela que je doit faire la balise img
+            <?php if($key == 'photo'):?>
+            <td><img src="img/<?=$value?>" alt"..." title="..."></td>
+            si c'est 'prix je veut afficher le petit €
+            <?php elseif($key == 'prix'):?>   
+            <td><?=$value?> €</td>
+            dans le reste des cas de figure affiche juste la valeur
+            <?php else:?>
+            <td><?=$value?></td>
+            <?php endif?>
+        <?php endforeach?>
+    </tr>
+<?php endwhile;?> -->
 
 
 
