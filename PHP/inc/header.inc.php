@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
-<body>
+<body class="bg-dark">
 
     <header>
     <!-- début de logo -->
@@ -18,7 +18,7 @@
     <!-- fin de logo -->
 
     <!-- début de navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Mon Site</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,7 @@
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-danger" type="submit">Search</button>
                     </form>
                 </div>
             </div>
@@ -64,6 +64,6 @@
         <!-- fin de nav -->
     </header>
 
-    <main class="container">
+    <main class="container bg-dark text-danger">
 
-    <div class="row"><img src="img/bandeau.png" alt=""></div>
+    <div class="row"><img src="img/banner.png" alt=""></div>

@@ -919,7 +919,7 @@ cette while va permetre de recupere chaque ligne qu'elle va rencontrer en BDD.
 la foreach quand a elle sert a recupere chaque valeurs de vehicule sur la quel elle boucle
 donc en soit la while cree un ligne la foreach prend le relais la remplis et ainsi de suite jusqu'a ce qu'il n'y est plus de donnees a metre dans une ligne.
 -->
-<table class="table md-12">
+<table class="table md-12 text-danger">
 
 <?php $afficheVoiture = $pdo->query("SELECT * FROM vehicule LIMIT 10 ")?> 
 
@@ -947,7 +947,38 @@ donc en soit la while cree un ligne la foreach prend le relais la remplis et ain
     </tbody>
 
 </table>
-<a href="../dialogue/dialogue.php" target="_blank"><button type="submit" class="btn btn-primary">vers la page dialogue</button></a>;
+<a href="../dialogue/dialogue.php" target="_blank"><button type="submit" class="btn btn-danger">vers la page dialogue</button></a>
+<!--Chapitre 17 Securité-->
+<!--securisation en FRONT -->
+<!--la verification des champ leur controle ne peut etre fait en front/ html comme ci dessou le max-length ou le pattern
+il suffirais au haker d'ouvrir l'inspecteur le supprimer et cette obstacle sera lever-->
+<form class="my-3" action="">
+<div class="mb-3">
+    <label for="pseudo" class="form-label">pseudo</label>
+    <input type="text" class="form-control" id='pseudo' name="pseudo" placeholder="voutre pseudo" maxlength="20" pattern="[a-zA-Z0-9.-_ô]{2,20}" title="ecrire un pseudo valide">
+</div>
+    <button type="submit" class="btn btn-danger">envoyer</button>
+</form>
+<!--verification de champ en traitement php-->
+<!--vous trouverais des verification de chams dans le projet location de voiture ou alors dans dialogue. referez vous y pour celle deja codée-->
+
+<?php 
+$erreur='';
+
+//verification du champ email, non travailler dans les 2 projet juste cités
+//la fonction filter_var en lui donnant en 1er parametre le champs conserner, pui en seconparametre FILTER_VALIDATE_EMAIL, va verifier si l'input de l'utilisateur correspond a un format d'adresse email ou non
+if(isset($_POST[''])|| !filter_var ($_POST[''], FILTER_VALIDATE_EMAIL)){
+    $erreur .="<p>Erreur format email</p>";
+    // l'erreur est du au fait qu'il n'y a aucun indice dans le if $_POST
+}
+
+//requette preparer elle permette un meilleur securisation de l'envoie vers la BDD il faut la privilegier a la methode query (ne garder celle ci que pour une requete de selection nous avont fait plusieur requete)
+
+?>
+
+<div>
+<button class='btn btn-danger my-2'><a class='text-light' href='securite/connexion.php' target='_blank'>vers la page connexion(securiter)</a></button>
+</div>
 
 <!-- ces particulariter pour afficher des valeur au format differant-->
 <!-- je doit afficher une photo, ou afficher un pris, je vais devoir faire des condition pour les differant cas de figure -->
@@ -971,7 +1002,7 @@ donc en soit la while cree un ligne la foreach prend le relais la remplis et ain
     </tr>
 <?php endwhile;?> -->
 
-
+>
 
 <?php
 require_once('inc/footer.inc.php');

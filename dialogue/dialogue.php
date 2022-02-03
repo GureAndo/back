@@ -40,14 +40,13 @@ if($_POST){
 
 }
 //affichage des donner dans la page
-$afficheMessage = $bdd->query("SELECT * FROM commentaire");
+// $afficheMessage = $bdd->query("SELECT * FROM commentaire ORDER BY pseudo LIMIT 8");
+$afficheMessage = $bdd->query("SELECT pseudo, message, DATE_FORMAT(date_enregistrement, '%d/%m/%Y') AS dateFR, DATE_FORMAT(date_enregistrement, '%H/%i/%s') AS heureFR  FROM commentaire ORDER BY pseudo LIMIT 8");
 
 
 // $message = $afficheMessage->fetch(PDO::FETCH_ASSOC);
-
 // $date_debut = strtotime($message['date_enregistrement']);
 // $date_fin = time();
-
 // $delai = round (($date_fin - $date_debut) / 86400);
 
 
@@ -95,15 +94,18 @@ $afficheMessage = $bdd->query("SELECT * FROM commentaire");
         <button type="submit" class="btn btn-danger col-12">envoyer</button>
 
     </form>
-
-    <h2 class="container text-center text-danger">Tout les Message envoyer</h2>
-    <div class='blockquote p-5 text-justify shadow mt-5 bg-white rounded'>     
-        <h3 class="md-5"> par: . poster le: </h3>
+    <!--la boucle while qui sert a afficher les pseudo, la date et les commentaire -->
+    <h2 class="container text-center text-danger"><?= $afficheMessage->rowCount()?> Message envoyer</h2>
+    <div class='blockquote p-5 text-justify shadow mt-5 bg-white rounded'>
+        <?php while($info = $afficheMessage->fetch(PDO::FETCH_ASSOC)):?>     
+        <h3 class="md-5"> par: <?=$info['pseudo']?> . poster le: <?=$info['dateFR']?></h3>
         <p>Commentaire: </p>
-        <p></p>
-    </div>    
-
+        <p><?=$info['message']?></p>
+        <?php endwhile?>
+    </div> 
+    <a href="test.php?id=<?= $info['id']?>" class="btn btn-danger">Voir l'annonce</a> 
     
+
 <!-- cdn js bootsrap-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
